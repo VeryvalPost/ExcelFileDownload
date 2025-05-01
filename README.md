@@ -25,6 +25,7 @@ _________
     c. Перейти в браузере по адресу http://Адрес удаленной машины:5000/swagger-ui/index.html
 
 Как вариант можно добавить в сервисы. И запустить через systemd
+
     systemctl start test.service
     systemctl enable test.service
     systemctl status test.service
@@ -50,6 +51,9 @@ _________
 Вариант докерфайла:
 
 FROM openjdk:17-jdk-alpine
+
 ADD target/test-0.0.1-SNAPSHOT.jar app.jar
+
 EXPOSE 5000
+
 ENTRYPOINT ["java","-jar","/app.jar"]
