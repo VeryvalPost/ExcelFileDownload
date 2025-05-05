@@ -8,6 +8,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.PriorityQueue;
 
@@ -29,8 +31,8 @@ public class ExcelFileUploadService {
         }
     }
 
-    public PriorityQueue<Integer> readExcelFile(MultipartFile file) {
-        PriorityQueue<Integer> dataQueue = new PriorityQueue<>();
+    public List<Integer> readExcelFile(MultipartFile file) {
+        List<Integer> dataQueue = new ArrayList<>();
 
         try (InputStream inputStream = file.getInputStream();
              Workbook workbook = new XSSFWorkbook(inputStream)) {

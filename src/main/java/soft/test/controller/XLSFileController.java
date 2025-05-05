@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 import soft.test.service.CalculateService;
 import soft.test.service.ExcelFileUploadService;
 
+import java.util.List;
 import java.util.PriorityQueue;
 
 @RestController
@@ -78,7 +79,7 @@ public class XLSFileController {
                 return ResponseEntity.badRequest().body("Файл не прошел валидацию");
             }
 
-            PriorityQueue<Integer> data = excelFileUploadService.readExcelFile(file);
+            List<Integer> data = excelFileUploadService.readExcelFile(file);
             int result = calculateService.getResultByParameter(data, n);
 
             return ResponseEntity.ok(result);
