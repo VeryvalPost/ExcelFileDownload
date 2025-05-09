@@ -2,18 +2,21 @@ package soft.test.service;
 
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.PriorityQueue;
+import java.util.*;
 import java.util.stream.Stream;
 
 @Service
 public class CalculateService {
 
+    private static final Random RANDOM = new Random();
+
     public int getResultByParameter(List<Integer> data, int n) {
         if (data == null || data.isEmpty() || data.size() < n || n <= 0) {
             throw new RuntimeException("Недопустимое значение n или пустой список");
+        }
+
+        if (data.contains(null)) {
+            throw new IllegalArgumentException("Список содержит null элементы");
         }
 
         Integer[] array = data.toArray(new Integer[0]);
@@ -37,8 +40,10 @@ public class CalculateService {
     }
 
     private int partition(Integer[] arr, int left, int right) {
-        int pivot = arr[right];
+        int index = RANDOM.nextInt(right - left + 1) + left;
+        int pivot = arr[index];
         int i = left;
+        swap(arr, index, right);
 
         for (int j = left; j < right; j++) {
             if (arr[j] <= pivot) {
